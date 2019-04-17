@@ -666,507 +666,506 @@ extern RET_StatusTypeDef HPS3D_SetROIReferenceType(HPS3D_HandleTypeDef *handle, 
 extern RET_StatusTypeDef HPS3D_SetROIRegion(HPS3D_HandleTypeDef *handle, ROIConfTypeDef roi_conf);
 
 /**
- * @brief	设置ROI使能
- * @param[in]	handle->DeviceAddr     设备地址
- * @param[in]   handle->DeviceFd       设备文件描述符fd
- * @param[in]	roi_id          	   ROI组ID选择输入
- * @param[in]	en     				   使能
+ * @brief	设置ROI使能 - Set ROI enable
+ * @param[in]	handle->DeviceAddr     设备地址 - Device address
+ * @param[in]   handle->DeviceFd       设备文件描述符fd - Device file descriptor fd
+ * @param[in]	roi_id          	   ROI组ID选择输入 - ROI group ID selection input
+ * @param[in]	en     				   使能 - Enable
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetROIEnable(HPS3D_HandleTypeDef *handle, uint32_t roi_id, bool en);
 
 /**
- * @brief	设置ROI阈值使能
- * @param[in]	handle->DeviceAddr     设备地址
- * @param[in]   handle->DeviceFd       设备文件描述符fd
- * @param[in]	roi_id	               ROI ID选择输入
- * @param[in]	threshold_id 		   阈值选择输入
- * @param[in]	en     		 		   使能
+ * @brief	设置ROI阈值使能 - Set the ROI threshold to enable
+ * @param[in]	handle->DeviceAddr     设备地址 - Device address
+ * @param[in]   handle->DeviceFd       设备文件描述符fd - Device file descriptor fd
+ * @param[in]	roi_id	               ROI ID选择输入 - ROI ID selection input
+ * @param[in]	threshold_id 		   阈值选择输入 - Threshold selection input
+ * @param[in]	en     		 		   使能 - Enable
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetROIThresholdEnable(HPS3D_HandleTypeDef *handle, uint32_t roi_id, uint32_t threshold_id, bool en);
 
 /**
- * @brief	设置ROI阈值配置
- * @param[in]	handle->DeviceAddr     				设备地址
- * @param[in]   handle->DeviceFd            		设备文件描述符fd
- * @param[in]	roi_id       						ROI ID选择输入
- * @param[in]	threshold_id 						阈值id选择输入
- * @param[in]   pix_num_threshold   				超过阈值的像素点数
- * @param[in]	hysteresis_conf.threshold_value		阈值
- * @param[in]	hysteresis_conf.hysteresis  		迟滞（死区）大小
- * @param[in]	hysteresis_conf.positive			比较器极性，true:正向比较, false：反向比较
+ * @brief	设置ROI阈值配置 - Set ROI threshold configuration
+ * @param[in]	handle->DeviceAddr     				设备地址 - Device address
+ * @param[in]   handle->DeviceFd            		设备文件描述符fd - Device file descriptor fd
+ * @param[in]	roi_id       						ROI ID选择输入 - ROI ID selection input
+ * @param[in]	threshold_id 						阈值id选择输入 - Threshold id selection input
+ * @param[in]   pix_num_threshold   				超过阈值的像素点数 - Number of pixels exceeding the threshold
+ * @param[in]	hysteresis_conf.threshold_value		阈值 - Threshold
+ * @param[in]	hysteresis_conf.hysteresis  		迟滞（死区）大小 - Hysteresis (dead zone) size
+ * @param[in]	hysteresis_conf.positive			比较器极性，true:正向比较, false：反向比较 - Comparator polarity, true: positive comparison, false: reverse comparison
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetROIThresholdConf(HPS3D_HandleTypeDef *handle, uint32_t roi_id, uint32_t threshold_id, uint16_t pix_num_threshold, HysteresisSingleConfTypeDef hysteresis_conf);
 
 /**
- * @brief	获取当前设备支持的ROI数量和阈值数量
- * @param[in]	handle->DeviceAddr     设备地址
- * @param[in]   handle->DeviceFd       设备文件描述符fd
- * @param[out]	roi_number      	   ROI 的数量
- * @param[out]	threshold_number 	   阈值的数量
+ * @brief	获取当前设备支持的ROI数量和阈值数量 - Get the number of ROIs and thresholds supported by the current device
+ * @param[in]	handle->DeviceAddr     设备地址 - Device address
+ * @param[in]   handle->DeviceFd       设备文件描述符fd - Device file descriptor fd
+ * @param[out]	roi_number      	   ROI 的数量 - Number of ROIs
+ * @param[out]	threshold_number 	   阈值的数量 - Number of thresholds
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetNumberOfROI(HPS3D_HandleTypeDef *handle, uint8_t *roi_number, uint8_t *threshold_number);
 
 /**
- * @brief	获取指定的ROI配置
- * @param[in]	handle->DeviceAddr     									设备地址
- * @param[in]   handle->DeviceFd            							设备文件描述符fd
- * @param[in]   roi_id  		       									指定ROI
- * @param[out]  roi_conf			   									输出配置
- * @param[out]	roi_conf.roi_id											ROI的ID
- * @param[out]	roi_conf.enable											ROI使能
- * @param[out]	roi_conf.left_top_x										左上角x坐标
- * @param[out]	roi_conf.left_top_y										左上角y坐标
- * @param[out]	roi_conf.right_bottom_x									右上角x坐标
- * @param[out]	roi_conf.right_bottom_y									右上角y坐标
+ * @brief	获取指定的ROI配置 - Get the specified ROI configuration
+ * @param[in]	handle->DeviceAddr     									设备地址 - Device address
+ * @param[in]   handle->DeviceFd            							设备文件描述符fd - Device file descriptor fd
+ * @param[in]   roi_id  		       									指定ROI - Specify ROI
+ * @param[out]  roi_conf			   									输出配置 - Output configuration
+ * @param[out]	roi_conf.roi_id											ROI的ID - ROI ID
+ * @param[out]	roi_conf.enable											ROI使能 - ROI enable
+ * @param[out]	roi_conf.left_top_x										左上角x坐标 - Upper left corner x coordinate
+ * @param[out]	roi_conf.left_top_y										左上角y坐标 - Upper left corner y coordinate
+ * @param[out]	roi_conf.right_bottom_x									右上角x坐标 - Upper right corner x coordinate
+ * @param[out]	roi_conf.right_bottom_y									右上角y坐标 - Upper right corner y coordinate
  *
- * （三组阈值输出）
- * @param[out]	roi_conf.ref_type[threshold_id]							ROI的参考值类型
- * @param[out]	roi_conf.alarm_type[threshold_id]						ROI的阈值警报类型
- * @param[out]	roi_conf.pixel_number_threshold[threshold_id]			超过阈值的像素点数
- * @param[out]	roi_conf.hysteresis_conf[threshold_id].threshold_id		阈值ID
- * @param[out]	roi_conf.hysteresis_conf[threshold_id].hysteresis		迟滞大小
- * @param[out]	roi_conf.hysteresis_conf[threshold_id].threshold_value	阈值
- * @param[out]	roi_conf.hysteresis_conf[threshold_id].positive			阈值极性
- * @param[out]	roi_conf.hysteresis_conf[threshold_id].enable			阈值使能
+ * （三组阈值输出）- (three sets of threshold outputs)
+ * @param[out]	roi_conf.ref_type[threshold_id]							ROI的参考值类型 - ROI reference value type
+ * @param[out]	roi_conf.alarm_type[threshold_id]						ROI的阈值警报类型 - ROI threshold alert type
+ * @param[out]	roi_conf.pixel_number_threshold[threshold_id]			超过阈值的像素点数 - Number of pixels exceeding the threshold
+ * @param[out]	roi_conf.hysteresis_conf[threshold_id].threshold_id		阈值ID - Threshold ID
+ * @param[out]	roi_conf.hysteresis_conf[threshold_id].hysteresis		迟滞大小 - Hysteresis size
+ * @param[out]	roi_conf.hysteresis_conf[threshold_id].threshold_value	阈值 - Threshold
+ * @param[out]	roi_conf.hysteresis_conf[threshold_id].positive			阈值极性 - Threshold polarity
+ * @param[out]	roi_conf.hysteresis_conf[threshold_id].enable			阈值使能 - Threshold enable
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetROIConfById(HPS3D_HandleTypeDef *handle, uint8_t roi_id, ROIConfTypeDef *roi_conf);
 
 /**
- * @brief	设置指定的GPIO输出端口的配置
- * @param[in]	handle->DeviceAddr       设备地址
- * @param[in]   handle->DeviceFd         设备文件描述符fd
- * @param[in]	gpio_out_conf 		     GPIO配置
- * @param[in]	gpio_out_conf.gpio	     GPIO输出口选择
- * @param[in]	gpio_out_conf.function   GPIO输出功能设置
- * @param[in]	gpio_out_conf.polarity   GPIO输出极性
- * @note        gpio_out_conf：只能配置IO输出
- * @retval	成功返回 RET_OK
+ * @brief	设置指定的GPIO输出端口的配置 - Set the configuration of the specified GPIO output port
+ * @param[in]	handle->DeviceAddr       设备地址 - Device address
+ * @param[in]   handle->DeviceFd         设备文件描述符fd - Device file descriptor fd
+ * @param[in]	gpio_out_conf 		     GPIO配置 - GPIO configuration
+ * @param[in]	gpio_out_conf.gpio	     GPIO输出口选择 - GPIO output port selection
+ * @param[in]	gpio_out_conf.function   GPIO输出功能设置 - GPIO output function setting
+ * @param[in]	gpio_out_conf.polarity   GPIO输出极性 - GPIO output polarity
+ * @note        gpio_out_conf：只能配置IO输出 - Gpio_out_conf: can only configure IO output
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetGPIOOut(HPS3D_HandleTypeDef *handle, GPIOOutConfTypeDef gpio_out_conf);
 
 /**
- * @brief	获取指定GPIO输出端口的配置
- * @param[in]	handle->DeviceAddr       设备地址
- * @param[in]   handle->DeviceFd         设备文件描述符fd
- * @param[in]	gpio_out_conf->gpio	     GPIO端口号选择
- * @param[out]	gpio_out_conf    	     GPIO输出配置
- * @param[out]	gpio_out_conf.function   GPIO输出功能设置
- * @param[out]	gpio_out_conf.polarity   GPIO输出极性
+ * @brief	获取指定GPIO输出端口的配置 - Get the configuration of the specified GPIO output port
+ * @param[in]	handle->DeviceAddr       设备地址 - Device address
+ * @param[in]   handle->DeviceFd         设备文件描述符fd - Device file descriptor fd
+ * @param[in]	gpio_out_conf->gpio	     GPIO端口号选择 - GPIO port number selection
+ * @param[out]	gpio_out_conf    	     GPIO输出配置 - GPIO output configuration
+ * @param[out]	gpio_out_conf.function   GPIO输出功能设置 - GPIO output function setting
+ * @param[out]	gpio_out_conf.polarity   GPIO输出极性 - GPIO output polarity
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetGPIOOutConf(HPS3D_HandleTypeDef *handle, GPIOOutConfTypeDef *gpio_out_conf);
 
 /**
- * @brief	设置指定的GPIO输入端口的配置
- * @param[in]	handle->DeviceAddr      设备地址
- * @param[in]   handle->DeviceFd        设备文件描述符fd
- * @param[in]	gpio_in_conf 		    GPIO配置
- * @param[in]	gpio_in_conf.gpio	    GPIO输入口选择
- * @param[in]	gpio_in_conf.function   GPIO输入功能设置
- * @param[in]	gpio_in_conf.polarity   GPIO输入极性
- * @note		gpio_in_conf：只能配置IO输入
- * @retval	成功返回 RET_OK
+ * @brief	设置指定的GPIO输入端口的配置 - Set the configuration of the specified GPIO input port
+ * @param[in]	handle->DeviceAddr      设备地址 - Device address
+ * @param[in]   handle->DeviceFd        设备文件描述符fd - Device file descriptor fd
+ * @param[in]	gpio_in_conf 		    GPIO配置 - GPIO configuration
+ * @param[in]	gpio_in_conf.gpio	    GPIO输入口选择 - GPIO input selection
+ * @param[in]	gpio_in_conf.function   GPIO输入功能设置 - GPIO input function setting
+ * @param[in]	gpio_in_conf.polarity   GPIO输入极性 - GPIO input polarity
+ * @note		gpio_in_conf：只能配置IO输入 - Gpio_in_conf: can only configure IO input
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetGPIOIn(HPS3D_HandleTypeDef *handle, GPIOInConfTypeDef gpio_in_conf);
 
 /**
- * @brief	获取指定GPIO输入端口的配置
- * @param[in]	handle->DeviceAddr      设备地址
- * @param[in]   handle->DeviceFd        设备文件描述符fd
- * @param[in]	gpio		  		    GPIO端口号选择
- * @param[out]	gpio_in_conf   	  	    获取GPIO配置的结构体指针
- * @param[out]	gpio_in_conf.function   GPIO输入功能设置
- * @param[out]	gpio_in_conf.polarity   GPIO输入极性
+ * @brief	获取指定GPIO输入端口的配置 - Get the configuration of the specified GPIO input port
+ * @param[in]	handle->DeviceAddr      设备地址 - Device address
+ * @param[in]   handle->DeviceFd        设备文件描述符fd - Device file descriptor fd
+ * @param[in]	gpio		  		    GPIO端口号选择 - GPIO port number selection
+ * @param[out]	gpio_in_conf   	  	    获取GPIO配置的结构体指针 - Get the structure pointer of the GPIO configuration
+ * @param[out]	gpio_in_conf.function   GPIO输入功能设置 - GPIO input function setting
+ * @param[out]	gpio_in_conf.polarity   GPIO输入极性 - GPIO input polarity
  * @note
- * @retval	 成功返回 RET_OK
+ * @retval	 成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetGPIOInConf(HPS3D_HandleTypeDef *handle, GPIOInConfTypeDef *gpio_in_conf);
 
 /**
- * @brief	设置HDR模式
- * @param[in]	handle->DeviceAddr     	设备地址
- * @param[in]   handle->DeviceFd        设备文件fd
- * @param[in]	hdr_mode   		 		输入HDR的模式
+ * @brief	设置HDR模式 - Set HDR mode
+ * @param[in]	handle->DeviceAddr     	设备地址 - Device address
+ * @param[in]   handle->DeviceFd        设备文件fd - Device file fd
+ * @param[in]	hdr_mode   		 		输入HDR的模式 - Input HDR mode
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetHDRMode(HPS3D_HandleTypeDef *handle, HDRModeTypeDef hdr_mode);
 
 /**
- * @brief	设置HDR
- * @param[in]	handle->DeviceAddr     					设备地址
- * @param[in]   handle->DeviceFd        				设备文件描述符fd
- * @param[in]	hdr_conf    		   					输入HDR的配置
- * @param[in]	hdr_conf.hdr_mode						HDR模式选择
- * 1、选择AUTO-HDR：
- * @param[in]	hdr_conf.qualtity_overexposed			AUTO-HDR曝光幅值
- * @param[in]	hdr_conf.qualtity_overexposed_serious	AUTO-HDR过度曝光幅值
- * @param[in]	hdr_conf.qualtity_weak					AUTO-HDR信号弱幅值
- * @param[in]	hdr_conf.qualtity_weak_serious			AUTO-HDR信号极弱幅值
- * 2、选择SIMPLE-HDR：
- * @param[in]	hdr_conf.simple_hdr_max_integration		SIMPLE-HDR最大积分时间
- * @param[in]	hdr_conf.simple_hdr_min_integration		SIMPLE-HDR最小积分时间
- * 3、选择SUPER-HDR
- * @param[in]	hdr_conf.super_hdr_frame_number			SUPER-HDR合成帧数
- * @param[in]	hdr_conf.super_hdr_max_integration		SUPER-HDR最大积分时间
- * 4、选择HDR-DISABLE
- * @param[in]	hdr_conf.hdr_disable_integration_time	HDR-DISABLE手动积分时间
- * @note		1、hdr_mode必须设置成HDR_DISABLE、AUTO_HDR、SUPER_HDR、	SIMPLE_HDR,否则返回RET_ERROR;
- * 			    2、其余配置按照HDRConf结构体里面的数据类型配置
- * @retval	成功返回 RET_OK
+ * @brief	设置HDR - Set HDR
+ * @param[in]	handle->DeviceAddr     					设备地址 - Device address
+ * @param[in]   handle->DeviceFd        				设备文件描述符fd - Device file descriptor fd
+ * @param[in]	hdr_conf    		   					输入HDR的配置 - Enter HDR configuration
+ * @param[in]	hdr_conf.hdr_mode						HDR模式选择 - HDR mode selection
+ * 1、选择AUTO-HDR： - Select AUTO-HDR:
+ * @param[in]	hdr_conf.qualtity_overexposed			AUTO-HDR曝光幅值 - AUTO-HDR exposure amplitude
+ * @param[in]	hdr_conf.qualtity_overexposed_serious	AUTO-HDR过度曝光幅值 - AUTO-HDR overexposure amplitude
+ * @param[in]	hdr_conf.qualtity_weak					AUTO-HDR信号弱幅值 - AUTO-HDR signal weak amplitude
+ * @param[in]	hdr_conf.qualtity_weak_serious			AUTO-HDR信号极弱幅值 - Very weak amplitude of AUTO-HDR signal
+ * 2、选择SIMPLE-HDR： - Select SIMPLE-HDR:
+ * @param[in]	hdr_conf.simple_hdr_max_integration		SIMPLE-HDR最大积分时间 - SIMPLE-HDR maximum integration time
+ * @param[in]	hdr_conf.simple_hdr_min_integration		SIMPLE-HDR最小积分时间 - SIMPLE-HDR minimum integration time
+ * 3、选择SUPER-HDR： - Select SUPER-HDR:
+ * @param[in]	hdr_conf.super_hdr_frame_number			SUPER-HDR合成帧数 - SUPER-HDR composite frame number
+ * @param[in]	hdr_conf.super_hdr_max_integration		SUPER-HDR最大积分时间 - SUPER-HDR maximum integration time
+ * 4、选择HDR-DISABLE: - Choose HDR-DISABLE:
+ * @param[in]	hdr_conf.hdr_disable_integration_time	HDR-DISABLE手动积分时间 - HDR-DISABLE manual integration time
+ * @note		1、hdr_mode必须设置成HDR_DISABLE、AUTO_HDR、SUPER_HDR, SIMPLE_HDR,否则返回RET_ERROR; - 1, hdr_mode must be set to HDR_DISABLE, AUTO_HDR, SUPER_HDR, SIMPLE_HDR; Otherwise return RET_ERROR;
+ * 			    2、其余配置按照HDRConf结构体里面的数据类型配置 - The rest of the configuration is configured according to the data type in the HDRConf structure.
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetHDRConfig(HPS3D_HandleTypeDef *handle, HDRConf hdr_conf);
 
 /**
- * @brief	获取HDR配置
- * @param[in]	handle->DeviceAddr     					设备地址
- * @param[in]   handle->DeviceFd        				设备文件描述符fd
- * @param[out]	hdr_conf	  		   					获取HDR配置
- * @param[out]	hdr_conf.hdr_mode						HDR模式选择
- * @param[out]	hdr_conf.qualtity_overexposed			AUTO-HDR曝光幅值
- * @param[out]	hdr_conf.qualtity_overexposed_serious	AUTO-HDR过度曝光幅值
- * @param[out]	hdr_conf.qualtity_weak					AUTO-HDR信号弱幅值
- * @param[out]	hdr_conf.qualtity_weak_serious			AUTO-HDR信号极弱幅值
- * @param[out]	hdr_conf.simple_hdr_max_integration		SIMPLE-HDR最大积分时间
- * @param[out]	hdr_conf.simple_hdr_min_integration		SIMPLE-HDR最小积分时间
- * @param[out]	hdr_conf.super_hdr_frame_number			SUPER-HDR合成帧数
- * @param[out]	hdr_conf.super_hdr_max_integration		SUPER-HDR最大积分时间
- * @param[out]	hdr_conf.hdr_disable_integration_time	HDR-DISABLE手动积分时间
+ * @brief	获取HDR配置 - Get HDR configuration
+ * @param[in]	handle->DeviceAddr     					设备地址 - Device address
+ * @param[in]   handle->DeviceFd        				设备文件描述符fd - Device file descriptor fd
+ * @param[out]	hdr_conf	  		   					获取HDR配置 - Get HDR configuration
+ * @param[out]	hdr_conf.hdr_mode						HDR模式选择 - HDR mode selection
+ * @param[out]	hdr_conf.qualtity_overexposed			AUTO-HDR曝光幅值 - AUTO-HDR exposure amplitude
+ * @param[out]	hdr_conf.qualtity_overexposed_serious	AUTO-HDR过度曝光幅值 - AUTO-HDR overexposure amplitude
+ * @param[out]	hdr_conf.qualtity_weak					AUTO-HDR信号弱幅值 - AUTO-HDR signal weak amplitude
+ * @param[out]	hdr_conf.qualtity_weak_serious			AUTO-HDR信号极弱幅值 - Very weak amplitude of AUTO-HDR signal
+ * @param[out]	hdr_conf.simple_hdr_max_integration		SIMPLE-HDR最大积分时间 - SIMPLE-HDR maximum integration time
+ * @param[out]	hdr_conf.simple_hdr_min_integration		SIMPLE-HDR最小积分时间 - SIMPLE-HDR minimum integration time
+ * @param[out]	hdr_conf.super_hdr_frame_number			SUPER-HDR合成帧数 - SUPER-HDR composite frame number
+ * @param[out]	hdr_conf.super_hdr_max_integration		SUPER-HDR最大积分时间 - SUPER-HDR maximum integration time
+ * @param[out]	hdr_conf.hdr_disable_integration_time	HDR-DISABLE手动积分时间 - HDR-DISABLE manual integration time
  * @note
- * @retval	 成功返回 RET_OK
+ * @retval	 成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetHDRConfig(HPS3D_HandleTypeDef *handle, HDRConf *hdr_conf);
 
 /**
- * @brief	设置距离滤波器类型
- * @param[in]	handle->DeviceAddr     	  		设备地址
- * @param[in]   handle->DeviceFd          		设备文件描述符fd
- * @param[in]	distance_filter_conf 	  		滤波器类型
- * 				-DISTANCE_FILTER_DISABLE  		距离滤波器不使能
- * 				-DISTANCE_FILTER_SIMPLE_KALMAN	简单卡尔曼滤波器
+ * @brief	设置距离滤波器类型 - Set the distance filter type
+ * @param[in]	handle->DeviceAddr     	  		设备地址 - Device address
+ * @param[in]   handle->DeviceFd          		设备文件描述符fd - Device file descriptor fd
+ * @param[in]	distance_filter_conf 	  		滤波器类型 - Filter type
+ * 				-DISTANCE_FILTER_DISABLE  		距离滤波器不使能 - Distance filter is not enabled
+ * 				-DISTANCE_FILTER_SIMPLE_KALMAN	简单卡尔曼滤波器 - Simple Kalman filter
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetDistanceFilterType(HPS3D_HandleTypeDef *handle, DistanceFilterTypeDef distance_filter_conf);
 
 /**
- * @brief	配置距离滤波器
- * @param[in]	handle->DeviceAddr     	  				设备地址
- * @param[in]   handle->DeviceFd          				设备文件描述符fd
- * @param[in]	distance_filter_conf	  				距离滤波器的配置
- * @param[in]	distance_filter_conf.kalman_K			距离滤波器的比例系数K
- * @param[in]	distance_filter_conf.num_check			距离滤波器阈值检查帧数
- * @param[in]	distance_filter_conf.kalman_threshold	距离滤波器噪声阈值
+ * @brief	配置距离滤波器 - Configuring distance filter
+ * @param[in]	handle->DeviceAddr     	  				设备地址 - Device address
+ * @param[in]   handle->DeviceFd          				设备文件描述符fd - Device file descriptor fd
+ * @param[in]	distance_filter_conf	  				距离滤波器的配置 - Distance filter configuration
+ * @param[in]	distance_filter_conf.kalman_K			距离滤波器的比例系数K - Distance factor K of the distance filter
+ * @param[in]	distance_filter_conf.num_check			距离滤波器阈值检查帧数 - Distance filter threshold check frame number
+ * @param[in]	distance_filter_conf.kalman_threshold	距离滤波器噪声阈值 - Distance filter noise threshold
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetSimpleKalman(HPS3D_HandleTypeDef *handle, DistanceFilterConfTypeDef distance_filter_conf);
 
 /**
- * @brief	获取距离滤波器配置
- * @param[in]	handle->DeviceAddr     	  				设备地址
- * @param[in]   handle->DeviceFd          				设备文件描述符fd
- * @param[out]	distance_filter_conf   	  				距离滤波器的结构体指针
- * @param[out]	distance_filter_conf.filter_type		距离滤波器的类型
- * @param[out]	distance_filter_conf.kalman_K			距离滤波器的比例系数K
- * @param[out]	distance_filter_conf.num_check			距离滤波器阈值检查帧数
- * @param[out]	distance_filter_conf.kalman_threshold	距离滤波器噪声阈值
+ * @brief	获取距离滤波器配置 - Get distance filter configuration
+ * @param[in]	handle->DeviceAddr     	  				设备地址 - Device address
+ * @param[in]   handle->DeviceFd          				设备文件描述符fd - Device file descriptor fd
+ * @param[out]	distance_filter_conf   	  				距离滤波器的结构体指针 - Structure pointer of the distance filter
+ * @param[out]	distance_filter_conf.filter_type		距离滤波器的类型 - Distance filter type
+ * @param[out]	distance_filter_conf.kalman_K			距离滤波器的比例系数K - Distance factor K of the distance filter
+ * @param[out]	distance_filter_conf.num_check			距离滤波器阈值检查帧数 - Distance filter threshold check frame number
+ * @param[out]	distance_filter_conf.kalman_threshold	距离滤波器噪声阈值 - Distance filter noise threshold
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetDistanceFilterConf(HPS3D_HandleTypeDef *handle, DistanceFilterConfTypeDef *distance_filter_conf);
 
 /**
- * @brief	设置平滑滤波器
- * @param[in]	handle->DeviceAddr     	  	设备地址
- * @param[in]   handle->DeviceFd          	设备文件描述符fd
- * @param[in]	smooth_filter_conf	  	  	平滑滤波器的设置
- * @param[in]	smooth_filter_conf.type		平滑滤波器的类型
- * @param[in]	smooth_filter_conf.arg1		平滑滤波器的滤波参数
+ * @brief	设置平滑滤波器 - Set the smoothing filter
+ * @param[in]	handle->DeviceAddr     	  	设备地址 - Device address
+ * @param[in]   handle->DeviceFd          	设备文件描述符fd - Device file descriptor fd
+ * @param[in]	smooth_filter_conf	  	  	平滑滤波器的设置 - Smoothing filter settings
+ * @param[in]	smooth_filter_conf.type		平滑滤波器的类型 - Type of smoothing filter
+ * @param[in]	smooth_filter_conf.arg1		平滑滤波器的滤波参数 - Smoothing filter parameters
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetSmoothFilter(HPS3D_HandleTypeDef *handle, SmoothFilterConfTypeDef smooth_filter_conf);
 
 /**
- * @brief	获取平滑滤波器的配置
- * @param[in]	handle->DeviceAddr     	  	设备地址
- * @param[in]   handle->DeviceFd          	设备文件描述符fd
- * @param[out]	smooth_filter_conf	  	  	平滑滤波器配置的结构体指针
- * @param[out]	smooth_filter_conf.type		平滑滤波器的类型
- * @param[out]	smooth_filter_conf.arg1		平滑滤波器的滤波参数
+ * @brief	获取平滑滤波器的配置 - Get the configuration of the smoothing filter
+ * @param[in]	handle->DeviceAddr     	  	设备地址 - Device address
+ * @param[in]   handle->DeviceFd          	设备文件描述符fd - Device file descriptor fd
+ * @param[out]	smooth_filter_conf	  	  	平滑滤波器配置的结构体指针 - Structure pointer for smoothing filter configuration
+ * @param[out]	smooth_filter_conf.type		平滑滤波器的类型 - Type of smoothing filter
+ * @param[out]	smooth_filter_conf.arg1		平滑滤波器的滤波参数 - Smoothing filter parameters
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetSmoothFilterConf(HPS3D_HandleTypeDef *handle, SmoothFilterConfTypeDef *smooth_filter_conf);
 
 /**
- * @brief	设定光学参数使能
- * @param[in]	handle->DeviceAddr     	  设备地址
- * @param[in]   handle->DeviceFd          设备文件描述符fd
- * @param[in]	en			  			  使能信号
+ * @brief	设定光学参数使能 - Set optical parameter enable
+ * @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+ * @param[in]   handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+ * @param[in]	en			  			  使能信号 - Enable signal
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetOpticalEnable(HPS3D_HandleTypeDef *handle, bool en);
 
 /**
- * @brief	获取光学参数
- * @param[in]	handle->DeviceAddr     	 		 			设备地址
- * @param[in]   handle->DeviceFd          					设备文件描述符fd
- * @param[out]	optical_param_conf	 	  					获取光学参数的结构体指针
- * @param[out]	optical_param_conf.enable					光学参数使能
- * @param[out]	optical_param_conf.viewing_angle_horiz		光学参数水平方向可视角
- * @param[out]	optical_param_conf.viewing_angle_vertical	光学参数垂直方向可视角
- * @param[out]	optical_param_conf.illum_angle_horiz		光学参数水平方向照明发射角
- * @param[out]	optical_param_conf.illum_angle_vertical		光学参数垂直方向照明发射角
+ * @brief	获取光学参数 - Obtain optical parameters
+ * @param[in]	handle->DeviceAddr     	 		 			设备地址 - Device address
+ * @param[in]   handle->DeviceFd          					设备文件描述符fd - Device file descriptor fd
+ * @param[out]	optical_param_conf	 	  					获取光学参数的结构体指针 - Get the structure pointer of the optical parameter
+ * @param[out]	optical_param_conf.enable					光学参数使能 - Optical parameter enable
+ * @param[out]	optical_param_conf.viewing_angle_horiz		光学参数水平方向可视角 - Optical parameter horizontal direction
+ * @param[out]	optical_param_conf.viewing_angle_vertical	光学参数垂直方向可视角 - Optical parameters, vertical direction, viewing angle
+ * @param[out]	optical_param_conf.illum_angle_horiz		光学参数水平方向照明发射角 - Optical parameter horizontal direction illumination emission angle
+ * @param[out]	optical_param_conf.illum_angle_vertical		光学参数垂直方向照明发射角 - Optical parameter vertical direction illumination emission angle
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetOpticalParamConf(HPS3D_HandleTypeDef *handle, OpticalParamConfTypeDef *optical_param_conf);
 
 /**
-* @brief	设置距离补偿
-* @param[in]	handle->DeviceAddr     	  设备地址
-* @param[in]    handle->DeviceFd          设备文件描述符fd
-* @param[in]	offset		  			  补偿距离
+* @brief	设置距离补偿 - Set distance compensation
+* @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+* @param[in]    handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+* @param[in]	offset		  			  补偿距离 - Compensation distance
 * @note
-* @retval	成功返回 RET_OK
+* @retval	成功返回 RET_OK - Successfully returned RET_OK
 */
 extern RET_StatusTypeDef HPS3D_SetDistanceOffset(HPS3D_HandleTypeDef *handle, int16_t offset);
 
 /**
-* @brief	获得距离补偿
-* @param[in]	handle->DeviceAddr     	  设备地址
-* @param[in]    handle->DeviceFd          设备文件描述符fd
-* @param[out]	offset		  			  输出距离补偿
+* @brief	获得距离补偿 - Obtain distance compensation
+* @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+* @param[in]    handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+* @param[out]	offset		  			  输出距离补偿 - Output distance compensation
 * @note
-* @retval	成功返回 RET_OK
+* @retval	成功返回 RET_OK - Successfully returned RET_OK
 */
 extern RET_StatusTypeDef HPS3D_GetDistanceOffset(HPS3D_HandleTypeDef *handle, int16_t *offset);
 
 /**
- * @brief	设置多机干扰检测使能
- * @param[in]	handle->DeviceAddr     	  设备地址
- * @param[in]   handle->DeviceFd          设备文件描述符fd
- * @param[in]	en		  	 			  使能信号
+ * @brief	设置多机干扰检测使能 - Set multi-machine interference detection enable
+ * @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+ * @param[in]   handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+ * @param[in]	en		  	 			  使能信号 - Enable signal
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetInterferenceDetectEn(HPS3D_HandleTypeDef *handle, bool en);
 
 /**
- * @brief	设置多机干扰检测积分时间
- * @param[in]	handle->DeviceAddr     	  设备地址
- * @param[in]   handle->DeviceFd          设备文件描述符fd
- * @param[in]	us		  	  			  积分时间
+ * @brief	设置多机干扰检测积分时间 - Set multi-machine interference detection integration time
+ * @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+ * @param[in]   handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+ * @param[in]	us		  	  			  积分时间 - Integration time
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetInterferenceDetectIntegTime(HPS3D_HandleTypeDef *handle, uint32_t us);
 
 /**
- * @brief	设置多机干扰检测阈值
- * @param[in]	handle->DeviceAddr     	  设备地址
- * @param[in]   handle->DeviceFd          设备文件描述符fd
- * @param[in]	thre		  			  阈值
+ * @brief	设置多机干扰检测阈值 - Set the multi-machine interference detection threshold
+ * @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+ * @param[in]   handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+ * @param[in]	thre		  			  阈值 - Threshold
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetInterferenceDetectAmplitudeThreshold(HPS3D_HandleTypeDef *handle, uint16_t thre);
 
 /**
- * @brief	设置多机干扰检测采样次数
- * @param[in]	handle->DeviceAddr     	  设备地址
- * @param[in]   handle->DeviceFd          设备文件描述符fd
- * @param[in]	capture_number  		  采样次数
+ * @brief	设置多机干扰检测采样次数 - Set the number of multi-machine interference detection samples
+ * @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+ * @param[in]   handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+ * @param[in]	capture_number  		  采样次数 - Number of samples
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetInterferenceDetectCaptureNumber(HPS3D_HandleTypeDef *handle, uint8_t capture_number);
 
 /**
- * @brief	设置多机干扰检测采样次数检查
- * @param[in]	handle->DeviceAddr     	  设备地址
- * @param[in]   handle->DeviceFd          设备文件描述符fd
- * @param[in]	capture_number_check   	  采样次数
+ * @brief	设置多机干扰检测采样次数检查 - Set the multi-machine interference detection sampling count check
+ * @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+ * @param[in]   handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+ * @param[in]	capture_number_check   	  采样次数 - Number of samples
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetInterferenceDetectNumberCheck(HPS3D_HandleTypeDef *handle, uint8_t capture_number_check);
 
 /**
- * @brief	获得多机干扰的配置
- * @param[in]	handle->DeviceAddr     	  						设备地址
- * @param[in]   handle->DeviceFd          						设备文件描述符fd
- * @param[out]	interference_detect_conf  						获得多机干扰配置的结构体指针
- * @param[out]	interference_detect_conf.enable					多机干扰检测使能
- * @param[out]	interference_detect_conf.integ_time				多机干扰检测积分时间
- * @param[out]	interference_detect_conf.amplitude_threshold	多机干扰检测阈值
- * @param[out]	interference_detect_conf.capture_num			多机干扰检测采样次数
- * @param[out]	interference_detect_conf.number_check			多机干扰检测采样次数检查
+ * @brief	获得多机干扰的配置 - Get multi-machine interference configuration
+ * @param[in]	handle->DeviceAddr     	  						设备地址 - Device address
+ * @param[in]   handle->DeviceFd          						设备文件描述符fd - Device file descriptor fd
+ * @param[out]	interference_detect_conf  						获得多机干扰配置的结构体指针 - Structure pointer for multi-machine interference configuration
+ * @param[out]	interference_detect_conf.enable					多机干扰检测使能 - Multi-machine interference detection enable
+ * @param[out]	interference_detect_conf.integ_time				多机干扰检测积分时间 - Multi-machine interference detection integration time
+ * @param[out]	interference_detect_conf.amplitude_threshold	多机干扰检测阈值 - Multi-machine interference detection threshold
+ * @param[out]	interference_detect_conf.capture_num			多机干扰检测采样次数 - Multi-machine interference detection sampling times
+ * @param[out]	interference_detect_conf.number_check			多机干扰检测采样次数检查 - Multi-machine interference detection sampling count check
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_GetInterferenceDetectConf(HPS3D_HandleTypeDef *handle, InterferenceDetectConfTypeDef *interference_detect_conf);
 
 /**
- * @brief	设定安装角度变换使能
- * @param[in]	handle->DeviceAddr     	  设备地址
- * @param[in]   handle->DeviceFd          设备文件描述符fd
- * @param[in]	en		      			  使能信号
+ * @brief	设定安装角度变换使能 - Set the installation angle change enable
+ * @param[in]	handle->DeviceAddr     	  设备地址 - Device address
+ * @param[in]   handle->DeviceFd          设备文件描述符fd - Device file descriptor fd
+ * @param[in]	en		      			  使能信号 - Enable signal
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
-/*extern RET_StatusTypeDef HPS3D_SetMountingAngleEnable(HPS3D_HandleTypeDef *handle, bool en);*/ /*此接口不再使用，采用以下接口替换*/
+/*extern RET_StatusTypeDef HPS3D_SetMountingAngleEnable(HPS3D_HandleTypeDef *handle, bool en);*/ /*此接口不再使用，采用以下接口替换 - This interface is no longer used and is replaced by the following interface*/
 
 /**
- * @brief	设定安装角度变换参数
- * @param[in]	handle->DeviceAddr     	  					设备地址
- * @param[in]   handle->DeviceFd          					设备文件描述符fd
- * @param[in]	mounting_angle_param_conf 					安装角度变换参数的配置
- * @param[in]	mounting_angle_param_conf.angle_vertical	垂直方向安装角度（°）
- * @param[in]	mounting_angle_param_conf.height			相对于地面的安装高度
+ * @brief	设定安装角度变换参数 - Set the installation angle transformation parameters
+ * @param[in]	handle->DeviceAddr     	  					设备地址 - Device address
+ * @param[in]   handle->DeviceFd          					设备文件描述符fd - Device file descriptor fd
+ * @param[in]	mounting_angle_param_conf 					安装角度变换参数的配置 - Installation angle transformation parameter configuration
+ * @param[in]	mounting_angle_param_conf.angle_vertical	垂直方向安装角度（°）- Vertical installation angle (°)
+ * @param[in]	mounting_angle_param_conf.height			相对于地面的安装高度 - Mounting height relative to the ground
  * @note
- * @retval	返回设定安装角度变换参数的结果，成功返回 RET_OK
+ * @retval	返回设定安装角度变换参数的结果，成功返回 RET_OK - Returns the result of setting the installation angle transformation parameter, and returns RET_OK successfully.
  */
 extern RET_StatusTypeDef HPS3D_SetMountingAngleParamConf(HPS3D_HandleTypeDef *handle, MountingAngleParamTypeDef mounting_angle_param_conf);
 
 /**
- * @brief	获取安装角度变换参数
- * @param[in]	handle->DeviceAddr     	  					设备地址
- * @param[in]   handle->DeviceFd          					设备文件描述符fd
- * @param[out]	mounting_angle_param_conf 					获得安装角度变换参数的结构体指针
- * @param[out]	mounting_angle_param_conf.enable			安装角度变换参数使能
- * @param[out]	mounting_angle_param_conf.angle_vertical	垂直方向安装角度（°）
- * @param[out]	mounting_angle_param_conf.height			相对于地面的安装高度(mm)
+ * @brief	获取安装角度变换参数 - Get the installation angle transformation parameter
+ * @param[in]	handle->DeviceAddr     	  					设备地址 - Device address
+ * @param[in]   handle->DeviceFd          					设备文件描述符fd - Device file descriptor fd
+ * @param[out]	mounting_angle_param_conf 					获得安装角度变换参数的结构体指针 - Get the structure pointer of the installation angle transformation parameter
+ * @param[out]	mounting_angle_param_conf.enable			安装角度变换参数使能 - Mounting angle transformation parameter enable
+ * @param[out]	mounting_angle_param_conf.angle_vertical	垂直方向安装角度（°）- Vertical installation angle (°)
+ * @param[out]	mounting_angle_param_conf.height			相对于地面的安装高度(mm) - Mounting height relative to the ground (mm)
  * @note
- * @retval	返回获取安装角度变换参数的结果，成功返回 RET_OK
+ * @retval	返回获取安装角度变换参数的结果，成功返回 RET_OK - Returns the result of getting the installation angle transformation parameter, and returns RET_OK successfully.
  */
 extern RET_StatusTypeDef HPS3D_GetMountingParamConf(HPS3D_HandleTypeDef *handle, MountingAngleParamTypeDef *mounting_angle_param_conf);
 
 
 
 /*************************************2.集成函数接口**********************************/
+/*************************************2.Integrated function interface**********************************/
 
 /**
- * @brief	获取目录下指定前缀文件(自动寻找设备)
- * @param[in]	dirPath 设备文件根目录
- * @param[in]   prefix  设备文件名前缀
- * @param[out]  fileName 用于保存当前当前目录下寻找到的设备
- * @note		例：n = HPS3D_GetDeviceList("/dev/","ttyACM",fileName);
- * @retval	返回获取成功的数量 0表示失败
+ * @brief	获取目录下指定前缀文件(自动寻找设备) - Get the specified prefix file under the directory (automatically find the device)
+ * @param[in]	dirPath 设备文件根目录 - Device file root directory
+ * @param[in]   prefix  设备文件名前缀 - Device file name prefix
+ * @param[out]  fileName 用于保存当前当前目录下寻找到的设备 - Used to save the device found in the current current directory
+ * @note		例：n = HPS3D_GetDeviceList("/dev/","ttyACM",fileName); - example
+ * @retval	返回获取成功的数量 0表示失败 - Returns the number of successful acquisitions 0 indicates failure
  */
 extern uint32_t HPS3D_GetDeviceList(uint8_t * dirPath,uint8_t *prefix,uint8_t fileName[DEV_NUM][DEV_NAME_SIZE]);
 
 /**
- * @brief	设备连接
- * @param[in]	handle->DeviceName  	设备名路径
- * @param[out]	handle->DeviceFd		设备文件描述符fd
- * @param[out]	handle->ConnectStatus	连接状态true
+ * @brief	设备连接 - Device connection
+ * @param[in]	handle->DeviceName  	设备名路径 - Device address
+ * @param[out]	handle->DeviceFd		设备文件描述符fd - Device file descriptor fd
+ * @param[out]	handle->ConnectStatus	连接状态true - Connection status true
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_Connect(HPS3D_HandleTypeDef *handle);
 
 /**
- * @brief	断开连接
- * @param[in]	handle->DeviceFd		设备文件描述符fd
- * @param[out]	handle->ConnectStatus	连接状态false
- * @note	函数执行的操作：
- * 			1.设置运行模式停止
+ * @brief	断开连接 - Disconnect
+ * @param[in]	handle->DeviceFd		设备文件描述符fd - Device file descriptor fd
+ * @param[out]	handle->ConnectStatus	连接状态false - Connection status false
+ * @note	函数执行的操作： - The operation performed by the function:
+ * 			1.设置运行模式停止 - Set the run mode to stop
  * 			2.close(fd)
  * 			3.ConnectStatus = false
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_DisConnect(HPS3D_HandleTypeDef *handle);
 
-
 /**
- * @brief	设备初始化
- * @param[in]	handle->mode				运行模式
- * @param[in]	handle->SyncMode			通讯模式
- * @param[out]	handle->DeviceAddr			输出设备地址
- * @param[out]	handle->OpticalEnable    	输出光学使能信号true or false
- * @note	函数执行的操作：
- * 			1.创建线程,创建读串口数据线程
- * 			2.先设置运行模式为停止模式（发命令时需要关闭运行模式）	HPS3D_SetRunMode(...)
- * 			3.发送获得设备地址命令	HPS3D_GetDevAddr(...)	[out]handle->DeviceAddr
- * 			4.发送获得光学参数使能命令	HPS3D_GetOpticalParamConf(...)	[out]handle->OpticalEnable
- * @retval	成功返回 RET_OK
+ * @brief	设备初始化 - Device initialization
+ * @param[in]	handle->mode				运行模式 - Operating mode
+ * @param[in]	handle->SyncMode			通讯模式 - Communication mode
+ * @param[out]	handle->DeviceAddr			输出设备地址 - Output device address
+ * @param[out]	handle->OpticalEnable    	输出光学使能信号true or false - Output optical enable signal true or false
+ * @note	函数执行的操作： - The operation performed by the function:
+ * 			1.创建线程,创建读串口数据线程 - Create a thread, create a read serial port data thread
+ * 			2.先设置运行模式为停止模式（发命令时需要关闭运行模式）	HPS3D_SetRunMode(...) - First set the running mode to stop mode (you need to close the running mode when issuing commands) HPS3D_SetRunMode(...)
+ * 			3.发送获得设备地址命令	HPS3D_GetDevAddr(...)	[out]handle->DeviceAddr - Send Get Device Address command HPS3D_GetDevAddr(...)	[out]handle->DeviceAddr
+ * 			4.发送获得光学参数使能命令	HPS3D_GetOpticalParamConf(...)	[out]handle->OpticalEnable - Send optical parameter enable command HPS3D_GetOpticalParamConf(...)	[out]handle->OpticalEnable
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_ConfigInit(HPS3D_HandleTypeDef *handle);
 
-
 /**
- * @brief	设置ROI的阈值
- * @param[in]	handle->DeviceAddr     									设备地址
- * @param[in]	handle->DeviceFd										设备文件描述符fd
- * @param[in]	threshold_id		  									阈值id
- * @param[in]	roi_conf			   									ROI配置结构体
- * @param[in]	roi_conf.roi_id											ROI的ID
- * @param[in]	roi_conf.ref_type[threshold_id]							ROI的参考值类型
- * @param[in]	roi_conf.alarm_type[threshold_id]						ROI的阈值警报类型
- * @param[in]	roi_conf.pixel_number_threshold[threshold_id]			超过阈值的像素点数
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].hysteresis		单点迟滞大小
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].threshold_value	单点阈值
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].positive			单点阈值极性
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].enable			单点阈值使能
- * @note		函数执行的操作：
- * 				1.先设置运行模式为停止模式（发命令时需要关闭运行模式）	HPS3D_SetRunMode(...)
- * 				2.发送设置ROI阈值配置命令	HPS3D_SetROIThresholdConf(...)
- * 				3.发送设置ROI的参考值类型命令	HPS3D_SetROIReferenceType(...)
- * 				4.发送设置ROI的警报类型命令		HPS3D_SetROIAlarmType(...)
- * 				5.发送设置ROI阈值使能命令	HPS3D_SetROIThresholdEnable(...)
- * @retval	成功返回 RET_OK
+ * @brief	设置ROI的阈值 - Set the threshold of the ROI
+ * @param[in]	handle->DeviceAddr     									设备地址 - Device address
+ * @param[in]	handle->DeviceFd										设备文件描述符fd - Device file descriptor fd
+ * @param[in]	threshold_id		  									阈值id - Threshold id
+ * @param[in]	roi_conf			   									ROI配置结构体 - ROI configuration structure
+ * @param[in]	roi_conf.roi_id											ROI的ID - ROI ID
+ * @param[in]	roi_conf.ref_type[threshold_id]							ROI的参考值类型 - ROI reference value type
+ * @param[in]	roi_conf.alarm_type[threshold_id]						ROI的阈值警报类型 - ROI threshold alert type
+ * @param[in]	roi_conf.pixel_number_threshold[threshold_id]			超过阈值的像素点数 - Number of pixels exceeding the threshold
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].hysteresis		单点迟滞大小 - Single point hysteresis size
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].threshold_value	单点阈值 - Single point threshold
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].positive			单点阈值极性 - Single point threshold polarity
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].enable			单点阈值使能 - Single point threshold enable
+ * @note		函数执行的操作： - The operation performed by the function:
+ * 				1.先设置运行模式为停止模式（发命令时需要关闭运行模式）	HPS3D_SetRunMode(...) - First set the running mode to stop mode (you need to close the running mode when issuing commands) HPS3D_SetRunMode(...)
+ * 				2.发送设置ROI阈值配置命令	HPS3D_SetROIThresholdConf(...) - Send Set ROI Threshold Configuration Command HPS3D_SetROIThresholdConf(...)
+ * 				3.发送设置ROI的参考值类型命令	HPS3D_SetROIReferenceType(...) - Send the reference value type command to set the ROI HPS3D_SetROIReferenceType(...)
+ * 				4.发送设置ROI的警报类型命令		HPS3D_SetROIAlarmType(...) - Send alert type command to set ROI HPS3D_SetROIAlarmType(...)
+ * 				5.发送设置ROI阈值使能命令	HPS3D_SetROIThresholdEnable(...) - Send Set ROI Threshold Enable Command HPS3D_SetROIThresholdEnable(...)
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetThreshold(HPS3D_HandleTypeDef *handle, uint8_t threshold_id, ROIConfTypeDef roi_conf);
 
 /**
- * @brief	设置单个ROI
- * @param[in]	handle->DeviceAddr     									设备地址
- * @param[in]	handle->DeviceFd										设备文件描述符fd
- * @param[in]   roi_conf 			   									ROI的设置结构体
- * @param[in]	roi_conf.roi_id											ROI的ID
- * @param[in]	roi_conf.enable											ROI使能
- * @param[in]	roi_conf.left_top_x										左上角x坐标
- * @param[in]	roi_conf.left_top_y										左上角y坐标
- * @param[in]	roi_conf.right_bottom_x									右上角x坐标
- * @param[in]	roi_conf.right_bottom_y									右上角y坐标
+ * @brief	设置单个ROI - Set a single ROI
+ * @param[in]	handle->DeviceAddr     									设备地址 - Device address
+ * @param[in]	handle->DeviceFd										设备文件描述符fd - Device file descriptor fd
+ * @param[in]   roi_conf 			   									ROI的设置结构体 - ROI setting structure
+ * @param[in]	roi_conf.roi_id											ROI的ID - ROI ID
+ * @param[in]	roi_conf.enable											ROI使能 - ROI enable
+ * @param[in]	roi_conf.left_top_x										左上角x坐标 - Upper left corner x coordinate
+ * @param[in]	roi_conf.left_top_y										左上角y坐标 - Upper left corner y coordinate
+ * @param[in]	roi_conf.right_bottom_x									右上角x坐标 - Upper right corner x coordinate
+ * @param[in]	roi_conf.right_bottom_y									右上角y坐标 - Upper right corner y coordinate
  *
- * 设置三组阈值
- * @param[in]	roi_conf.ref_type[threshold_id]							ROI的参考值类型
- * @param[in]	roi_conf.alarm_type[threshold_id]						ROI的阈值警报类型
- * @param[in]	roi_conf.pixel_number_threshold[threshold_id]			超过阈值的像素点数
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].roi_id			单点阈值属于哪个ROI
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].hysteresis		单点迟滞大小
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].threshold_value	单点阈值
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].positive			单点阈值极性
- * @param[in]	roi_conf.hysteresis_conf[threshold_id].enable			单点阈值使能
+ * 设置三组阈值 - Set three sets of thresholds
+ * @param[in]	roi_conf.ref_type[threshold_id]							ROI的参考值类型 - ROI reference value type
+ * @param[in]	roi_conf.alarm_type[threshold_id]						ROI的阈值警报类型 - ROI threshold alert type
+ * @param[in]	roi_conf.pixel_number_threshold[threshold_id]			超过阈值的像素点数 - Number of pixels exceeding the threshold
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].roi_id			单点阈值属于哪个ROI - Which ROI does the single point threshold belong to?
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].hysteresis		单点迟滞大小 - Single point hysteresis size
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].threshold_value	单点阈值 - Single point threshold
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].positive			单点阈值极性 - Single point threshold polarity
+ * @param[in]	roi_conf.hysteresis_conf[threshold_id].enable			单点阈值使能 - Single point threshold enable
  *
- * @param[in]   gpio_out_conf		  	 								GPIO配置结构体
- * @param[in]	gpio_out_conf.gpio	   									GPIO输出口选择
- * @param[in]	gpio_out_conf.function 									GPIO输出功能设置
- * @param[in]	gpio_out_conf.polarity 									GPIO输出极性
- * @note		gpio_out_conf：只能配置IO输出
- *				函数执行的操作：
- *				1.先设置运行模式为停止模式（发命令时需要关闭运行模式）	HPS3D_SetRunMode(...)
- *				2.发送设置ROI使能命令	HPS3D_SetROIEnable(...)
- *				3.发送设定ROI区域命令	HPS3D_SetROIRegion(...)
- *				4.发送设置ROI的阈值命令（三组阈值都设置）	HPS3D_SetThreshold(...1/2/3)
- *				5.发送设置指定的GPIO输出端口的配置命令	HPS3D_SetGPIOOut(...)
- * @retval	成功返回 RET_OK
+ * @param[in]   gpio_out_conf		  	 								GPIO配置结构体 - GPIO configuration structure
+ * @param[in]	gpio_out_conf.gpio	   									GPIO输出口选择 - GPIO output port selection
+ * @param[in]	gpio_out_conf.function 									GPIO输出功能设置 - GPIO output function setting
+ * @param[in]	gpio_out_conf.polarity 									GPIO输出极性 - GPIO output polarity
+ * @note		gpio_out_conf：只能配置IO输出 - Gpio_out_conf: can only configure IO output
+ *				函数执行的操作： - The operation performed by the function:
+ *				1.先设置运行模式为停止模式（发命令时需要关闭运行模式）HPS3D_SetRunMode(...) - First set the running mode to stop mode (you need to close the running mode when issuing commands) HPS3D_SetRunMode(...)
+ *				2.发送设置ROI使能命令	HPS3D_SetROIEnable(...) - Send Set ROI Enable Command HPS3D_SetROIEnable(...)
+ *				3.发送设定ROI区域命令	HPS3D_SetROIRegion(...) - Send Set ROI Area Command HPS3D_SetROIRegion(...)
+ *				4.发送设置ROI的阈值命令（三组阈值都设置）	HPS3D_SetThreshold(...1/2/3) - Send the threshold command to set the ROI (three sets of thresholds are set) HPS3D_SetThreshold(...1/2/3)
+ *				5.发送设置指定的GPIO输出端口的配置命令	HPS3D_SetGPIOOut(...) - Send configuration command to set the specified GPIO output port HPS3D_SetGPIOOut(...)
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetSingleRoi(HPS3D_HandleTypeDef *handle, ROIConfTypeDef roi_conf, GPIOOutConfTypeDef gpio_out_conf);
 
@@ -1183,61 +1182,61 @@ extern RET_StatusTypeDef HPS3D_SetSingleRoi(HPS3D_HandleTypeDef *handle, ROIConf
 extern RET_StatusTypeDef HPS3D_AddObserver(void * (*fun)(HPS3D_HandleTypeDef *,AsyncIObserver_t *),HPS3D_HandleTypeDef *handle,AsyncIObserver_t *Observer_t);
 
 /**
- * @brief	异步模式(连续测量模式) 移除观察者
- * @param[in]	Observer_t             		  观察者结构体
- * @param[in]	Observer_t->ObserverFunAddr   观察者函数地址
- * @param[in]   Observer_t->ObserverID 		  观察者ID
- * @param[in]   Observer_t->AsyncEvent 		  观察者通知事件
+ * @brief	异步模式(连续测量模式) 移除观察者 - Asynchronous mode (continuous measurement mode) removes the observer
+ * @param[in]	Observer_t             		  观察者结构体 - Observer structure
+ * @param[in]	Observer_t->ObserverFunAddr   观察者函数地址 - Observer function address
+ * @param[in]   Observer_t->ObserverID 		  观察者ID - Observer ID
+ * @param[in]   Observer_t->AsyncEvent 		  观察者通知事件 - Observer notification event
  * @note
- * @retval 成功返回RET_OK
+ * @retval 成功返回RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_RemoveObserver(AsyncIObserver_t *Observer_t);
 
 /**
- * @brief	设备卸载与资源回收(线程退出与资源释放)
- * @param[in]	handle->DeviceAddr     设备地址
- * @note	函数执行的操作：
+ * @brief	设备卸载与资源回收(线程退出与资源释放) - Device unloading and resource reclamation (thread exit and resource release)
+ * @param[in]	handle->DeviceAddr     设备地址 - Device address
+ * @note	函数执行的操作： - The operation performed by the function:
  * 			1.HPS3D_DisConnect(...)
- * 			2.如果handle->SyncMode == ASYNC或handle->RunMode == RUN_CONTINUOUS，则等待线程退出
- * @retval 成功返回RET_OK
+ * 			2.如果handle->SyncMode == ASYNC或handle->RunMode == RUN_CONTINUOUS，则等待线程退出 - Wait for the thread to exit if handle->SyncMode == ASYNC or handle->RunMode == RUN_CONTINUOUS
+ * @retval 成功返回RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_RemoveDevice(HPS3D_HandleTypeDef *handle);
 
 /**
- * @brief		设置debug使能
- * @param[in]	en				使能信号（默认开启）
+ * @brief		设置debug使能 - Set debug enable
+ * @param[in]	en				使能信号（默认开启）- Enable signal (on by default)
  * @note
- * @retval	 成功返回 RET_OK
+ * @retval	 成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetDebugEnable(bool en);
 
 /**
- * @brief		获得debug使能
+ * @brief		获得debug使能 - Get debug enable
  * @param
  * @note
- * @retval	 成功返回 true or false
+ * @retval	 成功返回 true or false - Successfully returns true or false
  */
 extern bool HPS3D_GetDebugEnable(void);
 
 /**
- * @brief		接收回调函数的地址
- * @param[in]	void *Call_Back     接收回调函数地址   回调函数为void *fun(uint8_t *str, uint16_t *str_len){...}
- * @param[out]	返回给回调函数str和strlen
+ * @brief		接收回调函数的地址 - Receive the address of the callback function
+ * @param[in]	void *Call_Back     接收回调函数地址   回调函数为void *fun(uint8_t *str, uint16_t *str_len){...} - Receive callback function address callback function is void *fun(uint8_t *str, uint16_t *str_len){...}
+ * @param[out]	返回给回调函数str和strlen - Return to callback function str and strlen
  * @note
- * @retval	 成功返回 RET_OK
+ * @retval	 成功返回 RET_OK - Successfully returned RET_OK
  */
 RET_StatusTypeDef HPS3D_SetDebugFunc(void (*Call_Back)(uint8_t *str));
 
 /**
- * @brief	设置点云数据转换使能
- * @param[in]	en     使能信号
+ * @brief	设置点云数据转换使能 - Set point cloud data conversion enable
+ * @param[in]	en     使能信号 - Enable signal
  * @note
- * @retval	成功返回 RET_OK
+ * @retval	成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_SetPointCloudEn(bool en);
 
 /**
- * @brief	得到点云数据转换使能信号
+ * @brief	得到点云数据转换使能信号 - Get point cloud data conversion enable signal
  * @param
  * @note
  * @retval	true or false
@@ -1245,25 +1244,25 @@ extern RET_StatusTypeDef HPS3D_SetPointCloudEn(bool en);
 extern bool HPS3D_GetPointCloudEn(void);
 
 /**
- * @brief		基本解析数据转换为点云数据输出
- * @param[in]	 MeasureData.full_roi_data/MeasureData.full_depth_data		解析的数据（结构体）
- * @param[in]	 RetPacketType												解析的数据类型
- * @param[out]  MeasureData.point_cloud_data								可以调用点云数据转换使能接口，设置输出的数据是否为点云数据
+ * @brief		基本解析数据转换为点云数据输出 - Basic analytical data conversion to point cloud data output
+ * @param[in]	 MeasureData.full_roi_data/MeasureData.full_depth_data		解析的数据（结构体）- Analyzed data (structure)
+ * @param[in]	 RetPacketType												解析的数据类型 - Parsed data type
+ * @param[out]  MeasureData.point_cloud_data								可以调用点云数据转换使能接口，设置输出的数据是否为点云数据 - You can call the point cloud data conversion enable interface to set whether the output data is point cloud data.
  * @note
  * @see
  * @code
  *
- * @retval	 成功返回 RET_OK
+ * @retval	 成功返回 RET_OK - Successfully returned RET_OK
  */
 RET_StatusTypeDef HPS3D_BaseToPointCloud(MeasureDataTypeDef *MeasureData, RetPacketTypedef RetPacketType);
 
 /**
- * @brief		将所有的ROI进行拼接，拼接成一张160x60的深度图
- * @param[in]	MeasureData			需要保存的测量数据
- * @param[in]   RetPacketType       测量数据的类型,必须是FULL_ROI_PACKET类型
- * @param[out]	distance     		拼接完的深度图160x60
+ * @brief		将所有的ROI进行拼接，拼接成一张160x60的深度图 - Splicing all ROIs into a 160x60 depth map
+ * @param[in]	MeasureData			需要保存的测量数据 - Measurement data that needs to be saved
+ * @param[in]   RetPacketType       测量数据的类型,必须是FULL_ROI_PACKET类型 - The type of measurement data must be of type FULL_ROI_PACKET
+ * @param[out]	distance     		拼接完的深度图160x60 - Spliced depth map 160x60
  * @note
- * @retval	 成功返回 RET_OK
+ * @retval	 成功返回 RET_OK - Successfully returned RET_OK
  */
 extern RET_StatusTypeDef HPS3D_RoiDepthCompound(MeasureDataTypeDef *MeasureData,RetPacketTypedef RetPacketType, uint16_t *distance);
 
@@ -1283,27 +1282,27 @@ extern RET_StatusTypeDef HPS3D_SingleMeasurement(HPS3D_HandleTypeDef *handle);
 
 /**
  * @brief		初始化障碍物提取参数 - Initialize obstacle extraction parameters
- * @param[in]	Conf	配置障碍物参数
+ * @param[in]	Conf	配置障碍物参数 - Configuring obstacle parameters
  * @note
  * @see
  * @code
  *
- * @retval	 成功返回 RET_OK
+ * @retval	 成功返回 RET_OK - Successfully returned RET_OK
  */
 extern ObstacleConfigTypedef HPS3D_GetObstacleConfigInit(void);
 
 /**
- * @brief		获取障碍物提取配置参数
+ * @brief		获取障碍物提取配置参数 - Obtain obstacle extraction configuration parameters
  * @param
  * @note
  * @see
  * @code
- * @retval	 返回障碍物配置参数信息
+ * @retval	 返回障碍物配置参数信息 - Return obstacle configuration parameter information
  */
 extern RET_StatusTypeDef HPS3D_ObstacleConfigInit(ObstacleConfigTypedef *Conf);
 
 /**
- * @brief		设置障碍物像素点个数阈值
+ * @brief		设置障碍物像素点个数阈值 - Set the threshold number of obstacle pixels
  * @param
  * @note
  * @see
@@ -1312,110 +1311,106 @@ extern RET_StatusTypeDef HPS3D_ObstacleConfigInit(ObstacleConfigTypedef *Conf);
  */
 extern void HPS3D_SetObstaclePixelNumberThreshold(uint32_t pixel_num_thr);
 /**
- * @brief		获取障碍物像素点个数阈值
+ * @brief		获取障碍物像素点个数阈值 - Obtain the threshold number of obstacle pixels
  * @param
  * @note
  * @see
  * @code
- * @retval  返回数量值
+ * @retval  返回数量值 - Return quantity value
  */
 extern uint32_t HPS3D_GetObstaclePixelNumberThreshold(void);
 
 
 /**
- * @brief		设置障碍物提取阈值偏置
+ * @brief		设置障碍物提取阈值偏置 - Set obstacle extraction threshold offset
  * @param
  * @note
  * @see
  * @code
- * @retval  返回空
+ * @retval  返回空 - Return empty
  */
 extern void HPS3D_SetThresholdOffset(int32_t thr_offset);
 
 /**
- * @brief		获取障碍物提取阈值偏置
+ * @brief		获取障碍物提取阈值偏置 - Obtain obstacle extraction threshold offset
  * @param
  * @note
  * @see
  * @code
- * @retval  阈值
+ * @retval  阈值 - Threshold
  */
 extern int32_t HPS3D_GetThresholdOffset(void);
 
-
 /**
- * @brief		获取SDK版本号
+ * @brief		获取SDK版本号 - Get the SDK version number
  * @param
  * @note
  * @see
  * @code
- * @retval	 版本信息
+ * @retval	 版本信息 - Version Information
  */
 extern Version_t HPS3D_GetSDKVersion(void);
 
-
-
-/* brief		将特殊测量输出值转换为指定特殊值参数配置
- * param[in]	enable 使能设置
- * param[in]    value  特殊测量结果重新赋值
+/* brief		将特殊测量输出值转换为指定特殊值参数配置 - Convert special measured output values to specified special value parameter configurations
+ * param[in]	enable 使能设置 - Enable setting
+ * param[in]    value  特殊测量结果重新赋值 - Special measurement results are reassigned
  * @note
  * @see
  * @code
  *
- * @retval	 返回状态值
+ * @retval	 返回状态值 - Return status value
  */
 extern RET_StatusTypeDef HPS3D_ConfigSpecialMeasurementValue(bool enable,uint16_t value);
 
-
-/* brief		设置边缘噪声滤除使能
- * param[in]	enable： true使能，false关闭
+/* brief		设置边缘噪声滤除使能 - Set edge noise filtering enable
+ * param[in]	enable： true使能，false关闭 - True enable, false close
  * @note
  * @see
  * @code
  *
- * @retval	 返回状态值
+ * @retval	 返回状态值 - Return status value
  */
 extern RET_StatusTypeDef HPS3D_SetEdgeDetectionEnable(bool en);
 
-/* brief		获取边缘噪声滤除使能
+/* brief		获取边缘噪声滤除使能 - Get edge noise filtering enable
  * param[in]
  * @note
  * @see
  * @code
  *
- * @retval	 返回状态值
+ * @retval	 返回状态值 - Return status value
  */
 extern bool HPS3D_GetEdgeDetectionEnable(void);
 
 
-/* brief		设置边缘噪声阈值
- * param[in]	enable： true使能，false关闭
+/* brief		设置边缘噪声阈值 - Set the edge noise threshold
+ * param[in]	enable： true使能，false关闭 - True enable, false close
  * @note
  * @see
  * @code
  *
- * @retval	 返回状态值
+ * @retval	 返回状态值 - Return status value
  */
 extern RET_StatusTypeDef HPS3D_SetEdgeDetectionValue(int32_t threshold_value);
 
-/* brief		获取边缘噪声阈值
+/* brief		获取边缘噪声阈值 - Get the edge noise threshold
  * param[in]
  * @note
  * @see
  * @code
  *
- * @retval	 返回状态值
+ * @retval	 返回状态值 - Return status value
  */
 extern int32_t HPS3D_GetEdgeDetectionValue(void);
 
 /**
-  * @brief	保存点云数据为ply格式文件
-  * @param[in] filename  文件名
-  * @param[in] point_cloud_data 测量结果中的电源数据
+  * @brief	保存点云数据为ply格式文件 - Save point cloud data to ply format file
+  * @param[in] filename  文件名 - file name
+  * @param[in] point_cloud_data 测量结果中的电源数据 - Power data in the measurement results
   * @note
   * @see
   * @code
-  * @retval 返回状态值
+  * @retval 返回状态值 - Return status value
   */
 /**/
 extern RET_StatusTypeDef HPS3D_SavePlyFile(uint8_t *filename,PointCloudDataTypeDef point_cloud_data);
