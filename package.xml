@@ -4,7 +4,7 @@
   <version>0.0.1</version>
   <description>The hps_camera package</description>
 
-  <maintainer email="patrick.nagel@h-brs.de">Patrick Nagel</maintainer>
+  <maintainer email="patrick.nagel@locomotec.com">Patrick Nagel</maintainer>
 
   <license>New BSD License</license>
 
@@ -20,5 +20,5 @@
   <exec_depend>std_msgs</exec_depend>
   <build_depend> message_generation </build_depend>
   <exec_depend> message_runtime </exec_depend>
-  
+
 </package>

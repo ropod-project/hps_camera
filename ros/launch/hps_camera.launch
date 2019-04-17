@@ -1,0 +1,28 @@
+<launch>
+  <node name="ros_hps_camera" pkg="hps_camera" type="ros_hps_camera" output="screen">
+    <param name="debugMode" type="bool" value="true" />
+    <param name="hdrConfHdrMode" type="int" value="0" />
+    <param name="hdrConfQualityOverexposed" type="double" value="500." />
+    <param name="hdrConfQualityOverexposedSerious" type="double" value="800." />
+    <param name="hdrConfQualityWeak" type="double" value="120." />
+    <param name="hdrConfQualityWeakSerious" type="double" value="80." />
+    <param name="hdrConfSimpleHdrMaxIntegration" type="int" value="2000" />
+    <param name="hdrConfSimpleHdrMinIntegration" type="int" value="200" />
+    <param name="hdrConfSuperHdrFrameNumber" type="int" value="3" />
+    <param name="hdrConfSuperHdrMaxIntegration" type="int" value="20000" />
+    <param name="hdrConfHdrDisableIntegrationTime" type="int" value="1000" />
+    <param name="distanceFilterConfFilterType" type="int" value="0" />
+    <param name="distanceFilterConfKalmanK" type="double" value="0.3" />
+    <param name="distanceFilterConfKalmanThreshold" type="int" value="200" />
+    <param name="distanceFilterConfNumCheck" type="int" value="2" />
+    <param name="smoothFilterConfType" type="int" value="0" />
+    <param name="smoothFilterConfArg1" type="int" value="0" />
+    <param name="mountingAngleParamConfEnable" type="bool" value="false" />
+    <param name="mountingAngleParamConfAngleVertical" type="int" value="0" />
+    <param name="mountingAngleParamConfHeight" type="int" value="0" />
+    <param name="distanceOffset" type="int" value="0" />
+    <param name="edgeDetectionEnable" type="bool" value="false" />
+    <param name="edgeDetectionThresholdValue" type="int" value="0" />
+    <!-- <rosparam command="load" file="$(find hps_camera)/ros/launch/test.yml" /> -->
+  </node>
+</launch>
