@@ -1,6 +1,7 @@
 #include <string>
 #include "ros/ros.h"//ros
 #include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/Image.h>
 #include <sensor_msgs/PointField.h>
 #include "../include/api.h"//api interface
 
@@ -8,7 +9,34 @@ using namespace std;
 
 HPS3D_HandleTypeDef handle;
 
-ros::Publisher camera_pub;
+ros::Publisher point_cloud_pub;
+ros::Publisher depth_image_pub;
+
+void convertDepthImage(HPS3D_HandleTypeDef *handle, sensor_msgs::Image *outputImage)
+{
+  // printf("Lenght: %u", sizeof(handle->MeasureData.simple_depth_data->distance)/sizeof(uint16_t));
+  outputImage->header.stamp = ros::Time::now();
+  outputImage->height = RES_HEIGHT; // 60
+  outputImage->width = RES_WIDTH; // 160
+  outputImage->encoding = "mono16";
+  outputImage->step = RES_WIDTH * 2;
+
+  int numberOfPixels = RES_HEIGHT * RES_WIDTH;
+  
+  int sizeOfOutputDataArray = numberOfPixels * 2;
+  outputImage->data.resize(sizeOfOutputDataArray);
+
+  int indexInputDataArray = 0;
+
+  for (int i = 0; i < sizeOfOutputDataArray; i+=2) 
+  {
+    // Extract the lower byte.
+    outputImage->data[i+1] = (uint8_t) handle->MeasureData.full_depth_data->distance[indexInputDataArray];
+    // Extract the upper byte.
+    outputImage->data[i] = (uint8_t) (handle->MeasureData.full_depth_data->distance[indexInputDataArray] >> 8);
+    indexInputDataArray += 1;
+  }
+}
 
 void convertPointCloud(HPS3D_HandleTypeDef *handle, sensor_msgs::PointCloud2 *outputPointCloud)
 {
@@ -21,12 +49,12 @@ void convertPointCloud(HPS3D_HandleTypeDef *handle, sensor_msgs::PointCloud2 *ou
   {
     for (int j = 0; j < RES_WIDTH; j++)
     {
+      uint16_t *distances = handle->MeasureData.simple_depth_data->distance;
       float32_t xCoordinate = -handle->MeasureData.point_cloud_data[0].point_data[i * RES_WIDTH + j].x / 1000;
       uint8_t* xCoordinateBytes = (uint8_t *)&xCoordinate;
       float32_t yCoordinate = handle->MeasureData.point_cloud_data[0].point_data[i * RES_WIDTH + j].y / 1000;
       uint8_t* yCoordinateBytes = (uint8_t *)&yCoordinate;
       float32_t zCoordinate = handle->MeasureData.point_cloud_data[0].point_data[i * RES_WIDTH + j].z / 1000;
-      // uint8_t* zCoordinateBytes = reinterpret_cast<uint8_t*>(&zCoordinate);
       uint8_t* zCoordinateBytes = (uint8_t *)&zCoordinate;
 
       int arrayPosition = (i * RES_WIDTH + j) * (numberOfFields * 4);
@@ -52,7 +80,8 @@ int main(int argc, char **argv)
 {
   ros::init(argc, argv, "ros_hps_camera");
   ros::NodeHandle n;
-  camera_pub = n.advertise<sensor_msgs::PointCloud2>("hps_camera/depth/points", 1);
+  point_cloud_pub = n.advertise<sensor_msgs::PointCloud2>("hps_camera/depth/points", 1);
+  depth_image_pub = n.advertise<sensor_msgs::Image>("hps_camera/depth/image", 1);
 
   bool debugMode;
   ros::param::param("~debugMode", debugMode, true);
@@ -121,6 +150,14 @@ int main(int argc, char **argv)
   outputPointCloud.fields.push_back(pointFieldZ);
 
   outputPointCloud.data.resize(RES_HEIGHT * RES_WIDTH * outputPointCloud.fields.size() * 4);
+
+  sensor_msgs::Image outputImage;
+  outputImage.header.seq = seq;
+  outputImage.header.frame_id = "hps_camera";
+  outputImage.height = RES_HEIGHT;
+  outputImage.width = RES_WIDTH;
+  outputImage.encoding = "mono16";
+  outputImage.step = RES_WIDTH;
 
   HDRConf hdrConf;
   DistanceFilterConfTypeDef distanceFilterConf;
@@ -292,7 +329,11 @@ int main(int argc, char **argv)
           seq += 1;
           outputPointCloud.header.seq = seq;
           convertPointCloud(&handle, &outputPointCloud);
-          camera_pub.publish(outputPointCloud);
+          point_cloud_pub.publish(outputPointCloud);
+
+          outputImage.header.seq = seq;
+          convertDepthImage(&handle, &outputImage);
+          depth_image_pub.publish(outputImage);
         } else {
           printf("Process stopped: This packet type is not supported yet.");
           break;
