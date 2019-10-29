@@ -31,9 +31,9 @@ void convertDepthImage(HPS3D_HandleTypeDef *handle, sensor_msgs::Image *outputIm
   for (int i = 0; i < sizeOfOutputDataArray; i+=2) 
   {
     // Extract the lower byte.
-    outputImage->data[i] = (uint8_t) handle->MeasureData.full_depth_data->distance[indexInputDataArray];
+    outputImage->data[i+1] = (uint8_t) handle->MeasureData.full_depth_data->distance[indexInputDataArray];
     // Extract the upper byte.
-    outputImage->data[i+1] = (uint8_t) (handle->MeasureData.full_depth_data->distance[indexInputDataArray] >> 8);
+    outputImage->data[i] = (uint8_t) (handle->MeasureData.full_depth_data->distance[indexInputDataArray] >> 8);
     indexInputDataArray += 1;
   }
 }
