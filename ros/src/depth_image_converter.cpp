@@ -4,25 +4,31 @@ using namespace std;
 
 void DepthImageConverter::convertToGrayscaleDepthImage(HPS3D_HandleTypeDef *handle, sensor_msgs::Image *outputImage)
 {
-  bool result = setOutputImageParameter(outputImage, "mono16");
+  bool result = setOutputImageParameter(outputImage, "mono8");
 
   uint16_t * distances = handle->MeasureData.full_depth_data->distance;
+  float32_t normalizedDistance = 0;
 
-  int sizeOfOutputDataArray = numberOfPixels * 2;
-
-  int indexInputDataArray = 0;
-  for (int i = 0; i < sizeOfOutputDataArray; i+=2) 
-  {
-    if (distances[i] > 12000) {
-      outputImage->data[i] = -1;
-      outputImage->data[i+1] = -1;
-    } else {
-      // Extract the lower byte.
-      outputImage->data[i+1] = (uint8_t) distances[indexInputDataArray];
-      // Extract the upper byte.
-      outputImage->data[i] = (uint8_t) distances[indexInputDataArray] >> 8;
+  uint16_t maxDistance = 0;
+  uint16_t minDistance = 12000;
+  for (int i = 0; i < numberOfPixels; i++) {
+    if (distances[i] < minDistance) {
+      minDistance = distances[i];
     }
-    indexInputDataArray += 1;
+
+    if (distances[i] > maxDistance && distances[i] <= 12000) {
+      maxDistance = distances[i];
+    }
+  }
+
+  for (int i = 0; i < numberOfPixels; i++) {
+    if (distances[i] > maxDistance) {
+      normalizedDistance = -1;
+    } else {
+      normalizedDistance = (1. * distances[i] - minDistance) / (maxDistance - minDistance);
+    }
+
+    outputImage->data[i] = normalizedDistance * 255;
   }
 }
 
@@ -186,7 +192,15 @@ void DepthImageConverter::printDepthImageInformation(HPS3D_HandleTypeDef *handle
 
 bool DepthImageConverter::setOutputImageParameter(sensor_msgs::Image *outputImage, const char *encoding)
 {
-  if (encoding == "mono16") {
+  if (encoding == "mono8") {
+    outputImage->header.stamp = ros::Time::now();
+    outputImage->height = RES_HEIGHT; // 60
+    outputImage->width = RES_WIDTH; // 160
+    outputImage->encoding = "mono8";
+    outputImage->step = RES_WIDTH;
+    outputImage->data.resize(numberOfPixels);
+    return true;
+  } else if (encoding == "mono16") {
     outputImage->header.stamp = ros::Time::now();
     outputImage->height = RES_HEIGHT; // 60
     outputImage->width = RES_WIDTH; // 160
