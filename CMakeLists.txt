@@ -25,14 +25,18 @@ catkin_package(
 ###########
 
 include_directories(
-  include
+  ros/include
   ${catkin_INCLUDE_DIRS}
 )
 
 add_executable(ros_hps_camera
   ros/src/ros_hps_camera.cpp
+  ros/src/depth_image_converter.cpp
+  ros/src/point_cloud_converter.cpp
 )
-target_link_libraries(ros_hps_camera
+
+target_link_libraries(
+  ros_hps_camera
   ${catkin_LIBRARIES}
   hps3d64179
 )
